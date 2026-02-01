@@ -30,11 +30,26 @@ public class Student {
     }
     //Submit Ideas
     void submitIdea(Scanner sc) {
-        System.out.print("\n\nEnter Project Title: ");
+        System.out.print("Enter Project Title: ");
         projectTitle = sc.nextLine();
 
         System.out.print("Enter Project Description: ");
         projectDescription = sc.nextLine();
+
+        System.out.print("Enter Project Category: ");
+        System.out.println("1. AI  2. IoT  3. Social");
+        System.out.print("Enter your choice: ");
+        ch = sc.nextInt();
+        
+        if (ch == 1) {
+            projectCategory = "AI";
+        } else if (ch == 2) {
+            projectCategory = "IoT";
+        } else if (ch == 3) {
+            projectCategory = "Social";
+        } else {
+            projectCategory = "Unknown";
+        }
 
         projectStatus = "Submitted";
         saveStudentIdeaToFile();
@@ -62,9 +77,10 @@ public class Student {
     // Save student idea to file
     void saveStudentIdeaToFile() {
         try (FileWriter writer = new FileWriter("student_ideas.txt", true)) {
-            writer.write("Reg No: " + rollNumber +
+            writer.write(" Reg No: " + rollNumber +
                     ", Project Title: " + projectTitle +
                     ", Project Description: " + projectDescription +
+                    ", Category: " + projectCategory +
                     ", Status: " + projectStatus + "\n");
         } catch (IOException e) {
             System.out.println("Error saving student idea.");
